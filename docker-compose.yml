@@ -27,8 +27,6 @@ services:
     container_name: node
     ports:
       - "3000:3000"
-    volumes:
-      - ./node:/usr/src/app
     tty: true
     depends_on:
       - mysql
@@ -36,8 +34,9 @@ services:
       - desafio-network
 
   mysql:
-    context: ./mysql
-    dockerfile: Dockerfile
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
